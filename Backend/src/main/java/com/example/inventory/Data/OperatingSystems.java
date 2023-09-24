@@ -8,11 +8,9 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "user")
-public class User {
-
+@Table(name = "operating_systems")
+public class OperatingSystems {
     @Id
-    private Long id;
-    private String userName;
-    private String password;
+    int operating_system_id;
+    String operating_system_name;
 }

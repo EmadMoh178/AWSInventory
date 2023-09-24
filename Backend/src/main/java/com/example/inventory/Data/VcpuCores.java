@@ -8,11 +8,9 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "user")
-public class User {
-
+@Table(name = "VcpuCores")
+public class VcpuCores {
     @Id
-    private Long id;
-    private String userName;
-    private String password;
+    int vcpu_core_id;
+    int core_count;
 }
