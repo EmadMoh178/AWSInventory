@@ -44,17 +44,17 @@ public class Ec2Controller {
         return ec2Services.addOperatingSystem(operatingSystem);
     }
 
-    @GetMapping("/getAllRegions")
+    @GetMapping("/ec2-instance-explorer/regions")
     public List < Regions > getRegions (){
         return ec2Services.getRegions();
     }
 
-    @GetMapping("/getAllVcpuCores")
+    @GetMapping("/ec2-instance-explorer/cpu")
     public List <VcpuCores> getVcpuCores(){
         return ec2Services.getVcpuCores();
     }
 
-    @GetMapping("/getAllOperatingSystems")
+    @GetMapping("/ec2-instance-explorer/operating-systems")
     public List <OperatingSystems> getOperatingSystems(){
         return ec2Services.getOperatingSystems();
     }
