@@ -2,7 +2,8 @@ package com.example.inventory.Data;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import jakarta.persistence.Table;
 
 @Data
 @Entity

@@ -2,7 +2,8 @@ package com.example.inventory.Data;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import jakarta.persistence.Table;
 
 @Data
 @Entity
@@ -15,6 +16,6 @@ public class RegionInstances {
     @ManyToOne
     @JoinColumn(name = "instance_id")
     private Ec2Instances instance;
-
+    @Id
     double price_per_hour;
 }

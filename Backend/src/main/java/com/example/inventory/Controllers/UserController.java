@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
-//    @Autowired
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+//    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public String login() {
@@ -29,7 +29,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(Users user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "redirect:/login";
     }

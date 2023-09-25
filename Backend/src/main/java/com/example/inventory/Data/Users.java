@@ -2,9 +2,9 @@ package com.example.inventory.Data;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Data
 @Entity
@@ -13,6 +13,6 @@ public class Users {
 
     @Id
     private int id;
-    private String userName;
+    private String username;
     private String password;
 }
