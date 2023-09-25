@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "VcpuCores")
+@Table(name = "vcpu_cores")
 public class VcpuCores {
     @Id
     int vcpu_core_id;

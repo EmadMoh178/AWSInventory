@@ -8,11 +8,11 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "users")
+public class Users {
 
     @Id
-    private Long id;
+    private int id;
     private String userName;
     private String password;
 }
