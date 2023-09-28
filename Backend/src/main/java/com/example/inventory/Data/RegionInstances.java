@@ -9,14 +9,14 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "region_instances")
 public class RegionInstances {
-    @Id
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Regions region;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "instance_id")
     private Ec2Instances instance;
+    @Id
+
     private double price_per_hour;
 }
