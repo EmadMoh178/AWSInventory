@@ -17,6 +17,5 @@ public class RegionInstances {
     @JoinColumn(name = "instance_id")
     private Ec2Instances instance;
     @Id
-
     private double price_per_hour;
 }
