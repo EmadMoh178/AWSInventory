@@ -1,6 +1,7 @@
 package com.example.inventory.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,23 @@ public class Ec2Services {
     }
     public List <OperatingSystems> getOperatingSystems(){
         return operatingSystemsRepository.findAll();
+    }
+
+    public List<RegionInstances> search(String regionName, String osName, Integer cpu){
+        // OperatingSystems os =operatingSystemsRepository.findByOperatingSystemName(osName);
+        // Integer os_id ;
+        // if(!operatingSystemsRepository.existsByOperatingSystemName(osName)) os_id = -1;
+        // else os_id =os.getOperatingSystemId();
+
+        // Regions regions =regionsRepository.findByRegionLongName(regionName);
+        // Integer region_id;
+        // if(!regionsRepository.existsByRegionLongName(regionName)) region_id= -1;
+        // else region_id=regions.getRegionId();
+
+        // VcpuCores vcpuCores = vcpuCoresRepository.findByCoreCount(cpu);
+
+        if(!vcpuCoresRepository.existsByCoreCount(cpu)) cpu= null;
+        // System.out.println(os.getOsId());
+        return regionInstancesRepository.findByQuery(regionName,osName,cpu);
     }
 }

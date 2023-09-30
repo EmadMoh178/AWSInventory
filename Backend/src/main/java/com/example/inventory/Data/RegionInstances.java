@@ -10,12 +10,12 @@ import jakarta.persistence.Table;
 @Table(name = "region_instances")
 public class RegionInstances {
     @ManyToOne
-    @JoinColumn(name = "region_id")
+    @JoinColumn(name = "regions_id")
     private Regions region;
 
     @ManyToOne
-    @JoinColumn(name = "instance_id")
+    @JoinColumn(name = "instances_id")
     private Ec2Instances instance;
     @Id
-    private double price_per_hour;
+    private double pricePerHour;
 }

@@ -1,8 +1,10 @@
 package com.example.inventory.Data;
 
 import lombok.Data;
-
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "operating_systems")
 public class OperatingSystems {
     @Id
-    int operating_system_id;
-    String operating_system_name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int operatingSystemId; 
+    String operatingSystemName;
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.inventory.Data.Ec2Instances;
@@ -57,5 +58,11 @@ public class Ec2Controller {
     @GetMapping("/ec2-instance-explorer/operating-systems")
     public List <OperatingSystems> getOperatingSystems(){
         return ec2Services.getOperatingSystems();
+    }
+
+    @PostMapping("/ec2-instance-explorer/search")
+    public List<RegionInstances> search(@RequestParam("regionName") String regionName, @RequestParam("osName") String osName, @RequestParam("cpu") Integer cpu){
+        
+        return ec2Services.search(regionName,osName,cpu);
     }
 }

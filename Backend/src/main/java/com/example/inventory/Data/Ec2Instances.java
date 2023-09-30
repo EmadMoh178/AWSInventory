@@ -10,15 +10,16 @@ import jakarta.persistence.Table;
 @Table(name = "ec2_instances")
 public class Ec2Instances {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int instance_id;
     String instance_name;
     @ManyToOne
-    @JoinColumn(name = "vcpu_core_id")
+    @JoinColumn(name = "vcpu_cores_id")
     VcpuCores vcpuCore;
 
     double memory;
     double network_performance;
     @ManyToOne
-    @JoinColumn(name = "operating_system_id")
+    @JoinColumn(name = "operating_systems_id")
     OperatingSystems operatingSystem;
 }
