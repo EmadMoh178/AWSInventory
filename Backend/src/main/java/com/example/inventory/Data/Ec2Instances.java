@@ -2,6 +2,8 @@ package com.example.inventory.Data;
 
 import lombok.Data;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
@@ -11,15 +13,18 @@ import jakarta.persistence.Table;
 public class Ec2Instances {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int instance_id;
-    String instance_name;
+    Integer instanceId;
+    String instanceName;
     @ManyToOne
     @JoinColumn(name = "vcpu_cores_id")
     VcpuCores vcpuCore;
 
     double memory;
-    double network_performance;
+    double networkPerformance;
     @ManyToOne
     @JoinColumn(name = "operating_systems_id")
     OperatingSystems operatingSystem;
+
+    @OneToMany(mappedBy = "instance")
+    private Set<RegionInstances> regionsSet;
 }

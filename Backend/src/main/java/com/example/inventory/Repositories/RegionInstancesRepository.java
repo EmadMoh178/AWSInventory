@@ -11,10 +11,8 @@ import com.example.inventory.Data.RegionInstances;
 
 @Repository
 public interface RegionInstancesRepository extends JpaRepository< RegionInstances,Integer> {
-    @Query(value = "SELECT ri.* FROM region_instances ri JOIN regions r ON ri.regions_id = r.region_id JOIN ec2_instances ei ON ri.instances_id = ei.instance_id JOIN " +
-            "vcpu_cores vc ON ei.vcpu_cores_id = vc.vcpu_core_id JOIN operating_systems os ON ei.operating_systems_id = os.operating_system_id WHERE " +
-            "(r.region_long_name IS NULL OR r.region_long_name = :regionName ) " +
-            "AND (vc.core_count IS NULL OR vc.core_count = :coreCount ) " +
-            "AND (os.operating_system_name IS NULL OR os.operating_system_name = :osName )", nativeQuery = true)
-    List<RegionInstances> findByQuery(@Param("osName")String osName, @Param("regionName")String regionName, @Param("coreCount")Integer coreCount);
+    @Query("SELECT ri FROM RegionInstances ri JOIN ri.region r JOIN ri.instance ei JOIN ei.vcpuCore vc JOIN ei.operatingSystem os WHERE (:regionName IS NULL OR r.regionLongName = :regionName) AND (:coreCount = 0 OR vc.coreCount = :coreCount) AND (:osName IS NULL OR os.operatingSystemName = :osName)")
+    List<RegionInstances> findRegionInstances(@Param("regionName") String regionName, @Param("osName") String osName, @Param("coreCount") Integer coreCount);
+
+    
 }

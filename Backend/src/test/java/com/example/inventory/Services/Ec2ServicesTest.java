@@ -151,15 +151,30 @@ class Ec2ServicesTest {
         verify(operatingSystemsRepository, times(1)).findAll();
     }
     @Test
-    public void testSearch() {
-        when(vcpuCoresRepository.existsByCoreCount(anyInt())).thenReturn(true);
-        when(regionsRepository.existsByRegionLongName(anyString())).thenReturn(true);
-        when(operatingSystemsRepository.existsByOperatingSystemName(anyString())).thenReturn(true);
-        when(regionInstancesRepository.findByQuery(anyString(), anyString(), anyInt()))
-                .thenReturn(Collections.emptyList());
+    public void testSearchFound() {
+        // Given
+        List<RegionInstances> regionInstancesList = Collections.singletonList(new RegionInstances());
+        when(regionInstancesRepository.findRegionInstances("Middle East", "Linux", 15))
+                .thenReturn(regionInstancesList);
 
-        List<RegionInstances> results = ec2Services.search("sampleRegion", "sampleOS", 2);
+        // When
+        List<RegionInstances> fetchedRegionInstancesList= ec2Services.search("Middle East", "Linux", 15);
+        
+        // Then
+        assertEquals(1,fetchedRegionInstancesList.size());
+    }
 
-        assertTrue(results.isEmpty());
+    @Test
+    public void testSearchNotFound() {
+        // Given
+        List<RegionInstances> regionInstancesList = Collections.singletonList(new RegionInstances());
+        when(regionInstancesRepository.findRegionInstances("Middle East", "Linux", 15))
+                .thenReturn(regionInstancesList);
+
+        // When
+        List<RegionInstances> fetchedRegionInstancesList= ec2Services.search("Europe", "Linux", 15);
+        
+        // Then
+        assertEquals(0,fetchedRegionInstancesList.size());
     }
 }
