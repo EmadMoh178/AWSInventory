@@ -152,7 +152,6 @@ class Ec2ServicesTest {
     }
     @Test
     public void testSearch() {
-        // Given: Mock the repository responses.
         when(vcpuCoresRepository.existsByCoreCount(anyInt())).thenReturn(true);
         when(regionsRepository.existsByRegionLongName(anyString())).thenReturn(true);
         when(operatingSystemsRepository.existsByOperatingSystemName(anyString())).thenReturn(true);
