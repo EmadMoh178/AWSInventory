@@ -63,20 +63,10 @@ public class Ec2Services {
     }
 
     public List<RegionInstances> search(String regionName, String osName, Integer cpu){
-        // OperatingSystems os =operatingSystemsRepository.findByOperatingSystemName(osName);
-        // Integer os_id ;
-        // if(!operatingSystemsRepository.existsByOperatingSystemName(osName)) os_id = -1;
-        // else os_id =os.getOperatingSystemId();
-
-        // Regions regions =regionsRepository.findByRegionLongName(regionName);
-        // Integer region_id;
-        // if(!regionsRepository.existsByRegionLongName(regionName)) region_id= -1;
-        // else region_id=regions.getRegionId();
-
-        // VcpuCores vcpuCores = vcpuCoresRepository.findByCoreCount(cpu);
 
         if(!vcpuCoresRepository.existsByCoreCount(cpu)) cpu= null;
-        // System.out.println(os.getOsId());
+        if(!regionsRepository.existsByRegionLongName(regionName)) regionName = null;
+        if(!operatingSystemsRepository.existsByOperatingSystemName(osName)) osName = null;
         return regionInstancesRepository.findByQuery(regionName,osName,cpu);
     }
 }

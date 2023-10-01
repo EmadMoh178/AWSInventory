@@ -150,4 +150,17 @@ class Ec2ServicesTest {
         assertEquals(1, fetchedOsList.size());
         verify(operatingSystemsRepository, times(1)).findAll();
     }
+    @Test
+    public void testSearch() {
+        // Given: Mock the repository responses.
+        when(vcpuCoresRepository.existsByCoreCount(anyInt())).thenReturn(true);
+        when(regionsRepository.existsByRegionLongName(anyString())).thenReturn(true);
+        when(operatingSystemsRepository.existsByOperatingSystemName(anyString())).thenReturn(true);
+        when(regionInstancesRepository.findByQuery(anyString(), anyString(), anyInt()))
+                .thenReturn(Collections.emptyList());
+
+        List<RegionInstances> results = ec2Services.search("sampleRegion", "sampleOS", 2);
+
+        assertTrue(results.isEmpty());
+    }
 }
