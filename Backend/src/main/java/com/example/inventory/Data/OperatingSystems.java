@@ -14,6 +14,6 @@ import jakarta.persistence.Table;
 public class OperatingSystems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer operatingSystemId; 
+    int operatingSystemId;
     String operatingSystemName;
 }
