@@ -1,5 +1,7 @@
 # AWS EC2 Products/Pricing Explorer
 
+For references and recommendation please contact my mentor [Hussein Elsayed](https://www.linkedin.com/in/hussein-abdelwahed/)
+
 ## Overview
 
 This repository contains the backend code for the AWS Elastic Compute Cloud (EC2) Products/Pricing Explorer service. This service integrates various backend and frontend elements to asynchronously fetch and analyze the products and prices of the AWS EC2 service. It then stores this data in a relational database, offers backend APIs for browsing and filtering, and serves as the foundation for the React-based web console for end users.
@@ -26,4 +28,3 @@ This repository contains the backend code for the AWS Elastic Compute Cloud (EC2
 
 - **Maven**: Maven is employed for building and managing project dependencies, simplifying the development process.
 
-   For references and recommendation please contact my mentor [Hussein Elsayed](https://www.linkedin.com/in/hussein-abdelwahed/)
