@@ -25,4 +25,5 @@ This repository contains the backend code for the AWS Elastic Compute Cloud (EC2
   - **Amazon RDS**: Amazon RDS is used as a relational database service for storing and managing data efficiently.
 
 - **Maven**: Maven is employed for building and managing project dependencies, simplifying the development process.
-   
+
+   For references and recommendation please contact my mentor [Hussein Elsayed](https://www.linkedin.com/in/hussein-abdelwahed/)
