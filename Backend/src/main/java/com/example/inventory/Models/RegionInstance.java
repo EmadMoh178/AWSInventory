@@ -8,17 +8,17 @@ import jakarta.persistence.Table;
 @Data
 @Entity
 @Table(name = "region_instances")
-public class RegionInstances {
+public class RegionInstance {
     @EmbeddedId
     RegionInstancesKey id;
     @ManyToOne
     @MapsId("regionId")
     @JoinColumn(name = "region_id")
-    private Regions region;
+    private Region region;
 
     @ManyToOne
     @MapsId("instanceId")
     @JoinColumn(name = "instance_id")
-    private Ec2Instances instance;
+    private Ec2Instance instance;
     private double pricePerHour;
 }

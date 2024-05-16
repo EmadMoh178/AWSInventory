@@ -1,7 +1,6 @@
 package com.example.inventory.Data;
 
 import lombok.Data;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,12 +9,10 @@ import jakarta.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "users")
-public class Users {
-
+@Table(name = "operating_systems")
+public class OperatingSystem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String username;
-    private String password;
+    int operatingSystemId;
+    String operatingSystemName;
 }

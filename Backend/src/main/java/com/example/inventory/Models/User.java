@@ -10,10 +10,12 @@ import jakarta.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "vcpu_cores")
-public class VcpuCores {
+@Table(name = "users")
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer vcpuCoreId;
-    Integer coreCount;
+    private Integer id;
+    private String username;
+    private String password;
 }

@@ -14,17 +14,17 @@ import jakarta.persistence.Table;
 @Data
 @Entity
 @Table(name = "regions")
-public class Regions {
+public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer regionId;
     String regionShortName;
     String regionLongName;
-    public Regions(int regionId){
+    public Region(int regionId){
         this.regionId = regionId;
     }
-    public Regions(){
+    public Region(){
     }
     @OneToMany(mappedBy = "region")
-    private Set<RegionInstances> intancesSet;
+    private Set<RegionInstance> intancesSet;
 }
