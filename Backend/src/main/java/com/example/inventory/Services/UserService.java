@@ -1,7 +1,7 @@
 package com.example.inventory.Services;
 
 
-import com.example.inventory.Data.Users;
+import com.example.inventory.Models.User;
 import com.example.inventory.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,21 +14,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServices implements UserDetailsService {
+public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
-    public Users addUser(Users user){
+    public User addUser(User user){
         return userRepository.save(user);
     }
-    public List<Users> getUsers(){
+    public List<User> getUsers(){
         return userRepository.findAll();
     }
 
-    public Users login(Users user) throws UsernameNotFoundException {
+    public User login(User user) throws UsernameNotFoundException {
         int id = user.getId();
-        Optional<Users> usersOptional = userRepository.findById(id);
-        Users loginUser;
+        Optional<User> usersOptional = userRepository.findById(id);
+        User loginUser;
         if(usersOptional.isEmpty())
             throw new UsernameNotFoundException("User with ID" + id + " is not found");
         loginUser = usersOptional.get();
@@ -36,7 +36,7 @@ public class UserServices implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userRepository.findByUsername(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }

@@ -1,6 +1,6 @@
 package com.example.inventory.Controllers;
 
-import com.example.inventory.Data.*;
+import com.example.inventory.Models.*;
 import com.example.inventory.Services.Ec2Services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -39,75 +38,75 @@ class Ec2ControllerTest {
 
     @Test
     void addInstanceTest() throws Exception {
-        Ec2Instances instance = new Ec2Instances();
-        when(ec2Services.addInstance(any(Ec2Instances.class))).thenReturn(instance);
+        Ec2Instance instance = new Ec2Instance();
+        when(ec2Services.addInstance(any(Ec2Instance.class))).thenReturn(instance);
 
-        mockMvc.perform(post("/addInstance")
+        mockMvc.perform(post("/instances")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(instance)))
                 .andExpect(status().isOk());
 
-        verify(ec2Services, times(1)).addInstance(any(Ec2Instances.class));
+        verify(ec2Services, times(1)).addInstance(any(Ec2Instance.class));
     }
 
     @Test
     void addRegionTest() throws Exception {
-        Regions region = new Regions();
-        when(ec2Services.addRegion(any(Regions.class))).thenReturn(region);
+        Region region = new Region();
+        when(ec2Services.addRegion(any(Region.class))).thenReturn(region);
 
-        mockMvc.perform(post("/addRegion")
+        mockMvc.perform(post("/regions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(region)))
                 .andExpect(status().isOk());
 
-        verify(ec2Services, times(1)).addRegion(any(Regions.class));
+        verify(ec2Services, times(1)).addRegion(any(Region.class));
     }
 
     @Test
     void addVcpuCoreTest() throws Exception {
-        VcpuCores vcpuCore = new VcpuCores();
-        when(ec2Services.addVcpuCore(any(VcpuCores.class))).thenReturn(vcpuCore);
+        VcpuCore vcpuCore = new VcpuCore();
+        when(ec2Services.addVcpuCore(any(VcpuCore.class))).thenReturn(vcpuCore);
 
-        mockMvc.perform(post("/addVcpuCore")
+        mockMvc.perform(post("/vcpu-cores")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(vcpuCore)))
                 .andExpect(status().isOk());
 
-        verify(ec2Services, times(1)).addVcpuCore(any(VcpuCores.class));
+        verify(ec2Services, times(1)).addVcpuCore(any(VcpuCore.class));
     }
 
     @Test
     void addRegionInstancesTest() throws Exception {
-        RegionInstances regionInstance = new RegionInstances();
-        when(ec2Services.addRegionInstance(any(RegionInstances.class))).thenReturn(regionInstance);
+        RegionInstance regionInstance = new RegionInstance();
+        when(ec2Services.addRegionInstance(any(RegionInstance.class))).thenReturn(regionInstance);
 
-        mockMvc.perform(post("/addRegionInstance")
+        mockMvc.perform(post("/region-instances")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(regionInstance)))
                 .andExpect(status().isOk());
 
-        verify(ec2Services, times(1)).addRegionInstance(any(RegionInstances.class));
+        verify(ec2Services, times(1)).addRegionInstance(any(RegionInstance.class));
     }
 
     @Test
     void addOsTest() throws Exception {
-        OperatingSystems operatingSystem = new OperatingSystems();
-        when(ec2Services.addOperatingSystem(any(OperatingSystems.class))).thenReturn(operatingSystem);
+        OperatingSystem operatingSystem = new OperatingSystem();
+        when(ec2Services.addOperatingSystem(any(OperatingSystem.class))).thenReturn(operatingSystem);
 
-        mockMvc.perform(post("/addOperatingSystem")
+        mockMvc.perform(post("/operating-systems")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(operatingSystem)))
                 .andExpect(status().isOk());
 
-        verify(ec2Services, times(1)).addOperatingSystem(any(OperatingSystems.class));
+        verify(ec2Services, times(1)).addOperatingSystem(any(OperatingSystem.class));
     }
 
     @Test
     void getRegionsTest() throws Exception {
-        Regions region = new Regions();
+        Region region = new Region();
         when(ec2Services.getRegions()).thenReturn(List.of(region));
 
-        mockMvc.perform(get("/ec2-instance-explorer/regions"))
+        mockMvc.perform(get("/regions"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(List.of(region))));
 
@@ -116,10 +115,10 @@ class Ec2ControllerTest {
 
     @Test
     void getVcpuCoresTest() throws Exception {
-        VcpuCores vcpuCore = new VcpuCores();
+        VcpuCore vcpuCore = new VcpuCore();
         when(ec2Services.getVcpuCores()).thenReturn(List.of(vcpuCore));
 
-        mockMvc.perform(get("/ec2-instance-explorer/cpu"))
+        mockMvc.perform(get("/vcpu-cores"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(List.of(vcpuCore))));
 
@@ -128,10 +127,10 @@ class Ec2ControllerTest {
 
     @Test
     void getOperatingSystemsTest() throws Exception {
-        OperatingSystems operatingSystem = new OperatingSystems();
+        OperatingSystem operatingSystem = new OperatingSystem();
         when(ec2Services.getOperatingSystems()).thenReturn(List.of(operatingSystem));
 
-        mockMvc.perform(get("/ec2-instance-explorer/operating-systems"))
+        mockMvc.perform(get("/operating-systems"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(List.of(operatingSystem))));
 

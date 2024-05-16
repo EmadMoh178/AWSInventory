@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.example.inventory.Models.Region;
 
 @Repository
-public interface RegionsRepository extends JpaRepository <Region, Integer>{
+public interface RegionRepository extends JpaRepository <Region, Integer>{
 }

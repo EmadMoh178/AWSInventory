@@ -1,9 +1,12 @@
 package com.example.inventory.DTO;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
-public class LoginDTO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDTO {
     private String username;
     private String password;
 }

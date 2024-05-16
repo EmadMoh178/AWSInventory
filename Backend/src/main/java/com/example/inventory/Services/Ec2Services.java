@@ -1,20 +1,19 @@
 package com.example.inventory.Services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.inventory.Data.Ec2Instances;
-import com.example.inventory.Data.OperatingSystems;
-import com.example.inventory.Data.RegionInstances;
-import com.example.inventory.Data.Regions;
-import com.example.inventory.Data.VcpuCores;
+import com.example.inventory.Models.Ec2Instance;
+import com.example.inventory.Models.OperatingSystem;
+import com.example.inventory.Models.RegionInstance;
+import com.example.inventory.Models.Region;
+import com.example.inventory.Models.VcpuCore;
 import com.example.inventory.Repositories.Ec2Repository;
 import com.example.inventory.Repositories.OperatingSystemsRepository;
 import com.example.inventory.Repositories.RegionInstancesRepository;
-import com.example.inventory.Repositories.RegionsRepository;
+import com.example.inventory.Repositories.RegionRepository;
 import com.example.inventory.Repositories.VcpuCoresRepository;
 
 
@@ -24,7 +23,7 @@ public class Ec2Services {
     Ec2Repository ec2Repository;
 
     @Autowired
-    RegionsRepository regionsRepository;
+    RegionRepository regionsRepository;
 
     @Autowired
     VcpuCoresRepository vcpuCoresRepository;
@@ -33,42 +32,38 @@ public class Ec2Services {
 
     @Autowired
     OperatingSystemsRepository operatingSystemsRepository;
-    public Ec2Instances addInstance(Ec2Instances ec2Instances){
+    public Ec2Instance addInstance(Ec2Instance ec2Instances){
         return ec2Repository.save(ec2Instances);
     }
 
-    public OperatingSystems addOperatingSystem(OperatingSystems operatingSystem){
+    public OperatingSystem addOperatingSystem(OperatingSystem operatingSystem){
         return operatingSystemsRepository.save(operatingSystem);
     }
 
-    public Regions addRegion(Regions region){
+    public Region addRegion(Region region){
         return regionsRepository.save(region);
     }
-    public VcpuCores addVcpuCore(VcpuCores vcpuCore){
+    public VcpuCore addVcpuCore(VcpuCore vcpuCore){
         return vcpuCoresRepository.save(vcpuCore);
     }
-    public RegionInstances addRegionInstance(RegionInstances regionInstance){
+    public RegionInstance addRegionInstance(RegionInstance regionInstance){
         return regionInstancesRepository.save(regionInstance);
     }
 
-    public List < Regions > getRegions (){
+    public List <Region> getRegions (){
         return regionsRepository.findAll();
     }
 
-    public List <VcpuCores> getVcpuCores(){
+    public List <VcpuCore> getVcpuCores(){
         return vcpuCoresRepository.findAll();
     }
-    public List <OperatingSystems> getOperatingSystems(){
+    public List <OperatingSystem> getOperatingSystems(){
         return operatingSystemsRepository.findAll();
     }
 
-    public List<RegionInstances> search(String regionName, String osName, Integer cpu){
+    public List<RegionInstance> search(String regionName, String osName, Integer cpu){
         if(regionName == "") regionName = null;
         if(osName == "") osName = null;
-        System.out.println(cpu);
-        // System.out.println(os.getOsId());
-        System.out.println(regionInstancesRepository.findRegionInstances(regionName, osName, cpu).size());
-        System.out.println(regionInstancesRepository.findRegionInstances(regionName, osName, cpu));
         return regionInstancesRepository.findRegionInstances(regionName,osName,cpu);
     }
 }

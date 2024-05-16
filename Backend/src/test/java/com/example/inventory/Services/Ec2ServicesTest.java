@@ -1,6 +1,6 @@
 package com.example.inventory.Services;
 
-import com.example.inventory.Data.*;
+import com.example.inventory.Models.*;
 import com.example.inventory.Repositories.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class Ec2ServicesTest {
     Ec2Repository ec2Repository;
 
     @Mock
-    RegionsRepository regionsRepository;
+    RegionRepository regionsRepository;
 
     @Mock
     VcpuCoresRepository vcpuCoresRepository;
@@ -42,11 +42,11 @@ class Ec2ServicesTest {
     @Test
     void addInstanceTest() {
         // Given
-        Ec2Instances instance = new Ec2Instances();
-        when(ec2Repository.save(any(Ec2Instances.class))).thenReturn(instance);
+        Ec2Instance instance = new Ec2Instance();
+        when(ec2Repository.save(any(Ec2Instance.class))).thenReturn(instance);
 
         // When
-        Ec2Instances savedInstance = ec2Services.addInstance(instance);
+        Ec2Instance savedInstance = ec2Services.addInstance(instance);
 
         // Then
         assertEquals(instance, savedInstance);
@@ -56,11 +56,11 @@ class Ec2ServicesTest {
     @Test
     void addOperatingSystemTest() {
         // Given
-        OperatingSystems os = new OperatingSystems();
-        when(operatingSystemsRepository.save(any(OperatingSystems.class))).thenReturn(os);
+        OperatingSystem os = new OperatingSystem();
+        when(operatingSystemsRepository.save(any(OperatingSystem.class))).thenReturn(os);
 
         // When
-        OperatingSystems savedOs = ec2Services.addOperatingSystem(os);
+        OperatingSystem savedOs = ec2Services.addOperatingSystem(os);
 
         // Then
         assertEquals(os, savedOs);
@@ -70,11 +70,11 @@ class Ec2ServicesTest {
     @Test
     void addRegionTest() {
         // Given
-        Regions region = new Regions();
-        when(regionsRepository.save(any(Regions.class))).thenReturn(region);
+        Region region = new Region();
+        when(regionsRepository.save(any(Region.class))).thenReturn(region);
 
         // When
-        Regions savedRegion = ec2Services.addRegion(region);
+        Region savedRegion = ec2Services.addRegion(region);
 
         // Then
         assertEquals(region, savedRegion);
@@ -84,11 +84,11 @@ class Ec2ServicesTest {
     @Test
     void addVcpuCoreTest() {
         // Given
-        VcpuCores vcpu = new VcpuCores();
-        when(vcpuCoresRepository.save(any(VcpuCores.class))).thenReturn(vcpu);
+        VcpuCore vcpu = new VcpuCore();
+        when(vcpuCoresRepository.save(any(VcpuCore.class))).thenReturn(vcpu);
 
         // When
-        VcpuCores savedVcpu = ec2Services.addVcpuCore(vcpu);
+        VcpuCore savedVcpu = ec2Services.addVcpuCore(vcpu);
 
         // Then
         assertEquals(vcpu, savedVcpu);
@@ -98,11 +98,11 @@ class Ec2ServicesTest {
     @Test
     void addRegionInstanceTest() {
         // Given
-        RegionInstances regionInstance = new RegionInstances();
-        when(regionInstancesRepository.save(any(RegionInstances.class))).thenReturn(regionInstance);
+        RegionInstance regionInstance = new RegionInstance();
+        when(regionInstancesRepository.save(any(RegionInstance.class))).thenReturn(regionInstance);
 
         // When
-        RegionInstances savedRegionInstance = ec2Services.addRegionInstance(regionInstance);
+        RegionInstance savedRegionInstance = ec2Services.addRegionInstance(regionInstance);
 
         // Then
         assertEquals(regionInstance, savedRegionInstance);
@@ -112,11 +112,11 @@ class Ec2ServicesTest {
     @Test
     void getRegionsTest() {
         // Given
-        List<Regions> regionsList = Collections.singletonList(new Regions());
+        List<Region> regionsList = Collections.singletonList(new Region());
         when(regionsRepository.findAll()).thenReturn(regionsList);
 
         // When
-        List<Regions> fetchedRegions = ec2Services.getRegions();
+        List<Region> fetchedRegions = ec2Services.getRegions();
 
         // Then
         assertEquals(1, fetchedRegions.size());
@@ -126,11 +126,11 @@ class Ec2ServicesTest {
     @Test
     void getVcpuCoresTest() {
         // Given
-        List<VcpuCores> vcpuList = Collections.singletonList(new VcpuCores());
+        List<VcpuCore> vcpuList = Collections.singletonList(new VcpuCore());
         when(vcpuCoresRepository.findAll()).thenReturn(vcpuList);
 
         // When
-        List<VcpuCores> fetchedVcpus = ec2Services.getVcpuCores();
+        List<VcpuCore> fetchedVcpus = ec2Services.getVcpuCores();
 
         // Then
         assertEquals(1, fetchedVcpus.size());
@@ -140,11 +140,11 @@ class Ec2ServicesTest {
     @Test
     void getOperatingSystemsTest() {
         // Given
-        List<OperatingSystems> osList = Collections.singletonList(new OperatingSystems());
+        List<OperatingSystem> osList = Collections.singletonList(new OperatingSystem());
         when(operatingSystemsRepository.findAll()).thenReturn(osList);
 
         // When
-        List<OperatingSystems> fetchedOsList = ec2Services.getOperatingSystems();
+        List<OperatingSystem> fetchedOsList = ec2Services.getOperatingSystems();
 
         // Then
         assertEquals(1, fetchedOsList.size());
@@ -153,12 +153,12 @@ class Ec2ServicesTest {
     @Test
     public void testSearchFound() {
         // Given
-        List<RegionInstances> regionInstancesList = Collections.singletonList(new RegionInstances());
+        List<RegionInstance> regionInstancesList = Collections.singletonList(new RegionInstance());
         when(regionInstancesRepository.findRegionInstances("Middle East", "Linux", 15))
                 .thenReturn(regionInstancesList);
 
         // When
-        List<RegionInstances> fetchedRegionInstancesList= ec2Services.search("Middle East", "Linux", 15);
+        List<RegionInstance> fetchedRegionInstancesList= ec2Services.search("Middle East", "Linux", 15);
         
         // Then
         assertEquals(1,fetchedRegionInstancesList.size());
@@ -167,12 +167,12 @@ class Ec2ServicesTest {
     @Test
     public void testSearchNotFound() {
         // Given
-        List<RegionInstances> regionInstancesList = Collections.singletonList(new RegionInstances());
+        List<RegionInstance> regionInstancesList = Collections.singletonList(new RegionInstance());
         when(regionInstancesRepository.findRegionInstances("Middle East", "Linux", 15))
                 .thenReturn(regionInstancesList);
 
         // When
-        List<RegionInstances> fetchedRegionInstancesList= ec2Services.search("Europe", "Linux", 15);
+        List<RegionInstance> fetchedRegionInstancesList= ec2Services.search("Europe", "Linux", 15);
         
         // Then
         assertEquals(0,fetchedRegionInstancesList.size());

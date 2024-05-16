@@ -1,9 +1,8 @@
-package com.example.inventory.Data;
+package com.example.inventory.Models;
 
 import java.io.Serializable;
 
 import jakarta.persistence.Embeddable;
-import lombok.Data;
 
 // @Data
 @Embeddable

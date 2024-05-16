@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.inventory.Data.Ec2Instances;
-import com.example.inventory.Data.OperatingSystems;
-import com.example.inventory.Data.RegionInstances;
-import com.example.inventory.Data.Regions;
-import com.example.inventory.Data.VcpuCores;
+import com.example.inventory.Models.Ec2Instance;
+import com.example.inventory.Models.OperatingSystem;
+import com.example.inventory.Models.RegionInstance;
+import com.example.inventory.Models.Region;
+import com.example.inventory.Models.VcpuCore;
 import com.example.inventory.Services.Ec2Services;
 
 @RestController
@@ -21,48 +21,48 @@ public class Ec2Controller {
     @Autowired
     Ec2Services ec2Services;
 
-    @PostMapping("/addInstance")
-    public Ec2Instances addInstance(@RequestBody Ec2Instances ec2Instances){
+    @PostMapping("/instances")
+    public Ec2Instance addInstance(@RequestBody Ec2Instance ec2Instances){
         return ec2Services.addInstance(ec2Instances);
     }
-    @PostMapping("/addRegion")
-    public Regions addRegion(@RequestBody Regions region){
+
+    @PostMapping("/regions")
+    public Region addRegion(@RequestBody Region region){
         return ec2Services.addRegion(region);
     }
 
-    @PostMapping("/addVcpuCore")
-    public VcpuCores addVcpuCore(@RequestBody VcpuCores vcpuCore){
+    @PostMapping("/vcpu-cores")
+    public VcpuCore addVcpuCore(@RequestBody VcpuCore vcpuCore){
         return ec2Services.addVcpuCore(vcpuCore);
     }
 
-    @PostMapping("/addRegionInstance")
-    public RegionInstances addRegionInstances(@RequestBody RegionInstances regionInstance){
+    @PostMapping("/region-instances")
+    public RegionInstance addRegionInstances(@RequestBody RegionInstance regionInstance){
         return ec2Services.addRegionInstance(regionInstance);
     }
 
-    @PostMapping("/addOperatingSystem")
-    public OperatingSystems addOs(@RequestBody OperatingSystems operatingSystem){
+    @PostMapping("/operating-systems")
+    public OperatingSystem addOs(@RequestBody OperatingSystem operatingSystem){
         return ec2Services.addOperatingSystem(operatingSystem);
     }
 
-    @GetMapping("/ec2-instance-explorer/regions")
-    public List < Regions > getRegions (){
+    @GetMapping("/regions")
+    public List <Region> getRegions (){
         return ec2Services.getRegions();
     }
 
-    @GetMapping("/ec2-instance-explorer/cpu")
-    public List <VcpuCores> getVcpuCores(){
+    @GetMapping("/vcpu-cores")
+    public List <VcpuCore> getVcpuCores(){
         return ec2Services.getVcpuCores();
     }
 
-    @GetMapping("/ec2-instance-explorer/operating-systems")
-    public List <OperatingSystems> getOperatingSystems(){
+    @GetMapping("/operating-systems")
+    public List <OperatingSystem> getOperatingSystems(){
         return ec2Services.getOperatingSystems();
     }
 
-    @PostMapping("/ec2-instance-explorer/search")
-    public List<RegionInstances> search(@RequestParam("regionName") String regionName, @RequestParam("osName") String osName, @RequestParam("cpu") Integer cpu){
-        
+    @PostMapping("/search")
+    public List<RegionInstance> search(@RequestParam("regionName") String regionName, @RequestParam("osName") String osName, @RequestParam("cpu") Integer cpu){
         return ec2Services.search(regionName,osName,cpu);
     }
 }

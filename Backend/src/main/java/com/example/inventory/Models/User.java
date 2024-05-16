@@ -1,4 +1,4 @@
-package com.example.inventory.Data;
+package com.example.inventory.Models;
 
 import lombok.Data;
 
@@ -12,7 +12,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
