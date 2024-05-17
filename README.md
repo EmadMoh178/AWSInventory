@@ -2,6 +2,10 @@
 
 For references and recommendation please contact my mentor [Hussein Elsayed](https://www.linkedin.com/in/hussein-abdelwahed/)
 
+## Demo
+
+https://github.com/EmadMoh178/AWSInventory/assets/108467668/9d87189a-d5a8-46ee-b5d9-114083f89f91
+
 ## Overview
 
 This repository contains the backend code for the AWS Elastic Compute Cloud (EC2) Products/Pricing Explorer service. This service integrates various backend and frontend elements to asynchronously fetch and analyze the products and prices of the AWS EC2 service. It then stores this data in a relational database, offers backend APIs for browsing and filtering, and serves as the foundation for the React-based web console for end users.
